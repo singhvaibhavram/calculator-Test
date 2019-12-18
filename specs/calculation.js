@@ -24,6 +24,12 @@ describe('Super Calculator Testing', function(){
   it('return the result', function(){
     calculationOperation(2, '-', 1);
     expect(calcResult.getText()).toEqual('1');
+    calculationOperation(5, '%', 3);
+    expect(calcResult.getText()).toEqual('2');
+    calculationOperation(2, '+', 1);
+    expect(calcResult.getText()).toEqual('3');
+    calculationOperation(2, '*', 1);
+    expect(calcResult.getText()).toEqual('2');
   });
 
   function calculationOperation(a, operator, b){
