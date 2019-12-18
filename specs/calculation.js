@@ -4,7 +4,22 @@ describe('Super Calculator Testing', function(){
   var secondNumber = element(by.model('second'));
   var calculationButton = element(by.id('gobutton'));
   var calcResult = element(by.css('h2.ng-binding'));
-  //var history = element(by.repeater('result in memory'));
+  var calcHistory = element.all(by.repeater('result in memory'));
+
+  beforeEach(function() {
+   browser.get('http://juliemr.github.io/protractor-demo/');
+  });
+
+  it('should have a title', function() {
+   expect(browser.getTitle()).toEqual('Super Calculator');
+  });
+
+  it('should check the history', function(){
+    calculationOperation(2, '*', 2);
+    calculationOperation(2, '+', 3);
+
+    expect(calcHistory.count()).toEqual(2);
+  });
 
   it('return the result', function(){
     calculationOperation(2, '-', 1);
@@ -35,7 +50,7 @@ describe('Super Calculator Testing', function(){
   }
 
   function ifmatchingOperator(option, expectedValue){
-    option.getWebElement().getInnerHtml().then(function(optionValue){
+    option.getWebElement().getText().then(function(optionValue){
       if(optionValue === expectedValue){
         option.click();
       }
